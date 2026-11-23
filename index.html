@@ -7,7 +7,7 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { margin: 0; padding: 0; background-color: #0b0410; color: white; padding-bottom: 80px; }
+        body { margin: 0; padding: 0; background-color: #0b0410; color: white; padding-bottom: 60px; }
         
         .profile-section { padding: 20px; }
         .profile-card { background: linear-gradient(145deg, #1a0b2e, #0d0515); border: 1px solid #7a22b8; border-radius: 20px; padding: 20px; display: flex; align-items: center; gap: 15px; box-shadow: 0 0 20px rgba(122, 34, 184, 0.3); }
@@ -40,8 +40,9 @@
         .action-btn { width: 100%; padding: 15px; background: linear-gradient(90deg, #ff00cc, #333399); border: none; border-radius: 15px; color: white; font-size: 16px; font-weight: bold; text-transform: uppercase; box-shadow: 0 0 15px #ff00cc, 0 0 30px #333399; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 15px #ff00cc, 0 0 30px #333399; } 50% { box-shadow: 0 0 25px #00ffff, 0 0 40px #ff00cc; } 100% { box-shadow: 0 0 15px #ff00cc, 0 0 30px #333399; } }
 
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #0d0515; border-top: 1px solid #331a4d; display: flex; justify-content: space-around; padding: 15px 0; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; color: #666; font-size: 12px; font-weight: bold; gap: 5px; }
+        /* বাটনগুলো ছোট এবং সুন্দর করা হয়েছে */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #0d0515; border-top: 1px solid #331a4d; display: flex; justify-content: space-around; padding: 8px 0; padding-bottom: env(safe-area-inset-bottom); z-index: 1000; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; color: #666; font-size: 11px; font-weight: bold; gap: 2px; }
         .nav-item.active { color: #ff00cc; text-shadow: 0 0 10px #ff00cc; }
         
         .loading-text { text-align: center; color: #ff00cc; padding: 20px; font-size: 14px; }
@@ -81,7 +82,6 @@
 
     <div class="section-title">🔥 হট ভিডিও</div>
     
-    <!-- ভিডিওগুলো এখানে লোড হবে -->
     <div id="video-container">
         <p class="loading-text">ভিডিও লোড হচ্ছে...</p>
     </div>
@@ -96,7 +96,6 @@
         let tg = window.Telegram.WebApp;
         tg.expand();
         
-        // টেলিগ্রাম ইউজারের ডেটা লোড করা
         setTimeout(() => {
             if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
                 const user = tg.initDataUnsafe.user;
@@ -106,7 +105,6 @@
             }
         }, 300);
 
-        // ডাটাবেস থেকে ভিডিও লোড করা
         const API_URL = "https://my-bot-backend.saeidkhan92sk.workers.dev/api/videos";
 
         async function loadVideos() {
@@ -120,7 +118,7 @@
                     return;
                 }
 
-                container.innerHTML = ''; // আগের লোডিং টেক্সট মুছে ফেলা
+                container.innerHTML = ''; 
 
                 videos.forEach(video => {
                     const videoCard = `
@@ -143,16 +141,15 @@
                 });
             } catch (error) {
                 console.error("Error loading videos:", error);
-                document.getElementById('video-container').innerHTML = '<p class="loading-text">ভিডিও লোড করা যায়নি!</p>';
+                // এরর আসলে কী কারণ তা দেখানোর জন্য
+                document.getElementById('video-container').innerHTML = `<p class="loading-text">ভিডিও লোড করা যায়নি! এরর: ${error.message}</p>`;
             }
         }
 
-        // অ্যাড দেখার ফাংশন (আপাতত ডেমো)
         function unlockVideo(fileId) {
             alert("এখানে Monetag এর অ্যাড আসবে! অ্যাড দেখার পর ভিডিও আনলক হবে: " + fileId);
         }
 
-        // পেজ লোড হলে ভিডিও নিয়ে আসা
         loadVideos();
     </script>
 </body>
