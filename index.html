@@ -9,78 +9,45 @@
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { margin: 0; padding: 0; background-color: #0b0410; color: white; padding-bottom: 80px; }
         
-        /* Profile Section */
         .profile-section { padding: 20px; }
-        .profile-card { 
-            background: linear-gradient(145deg, #1a0b2e, #0d0515);
-            border: 1px solid #7a22b8;
-            border-radius: 20px; 
-            padding: 20px; 
-            display: flex; 
-            align-items: center; 
-            gap: 15px;
-            box-shadow: 0 0 20px rgba(122, 34, 184, 0.3);
-        }
-        .avatar { 
-            width: 60px; height: 60px; 
-            border-radius: 50%; 
-            background: linear-gradient(45deg, #00d2ff, #3a7bd5);
-            display: flex; justify-content: center; align-items: center; 
-            font-size: 28px; font-weight: bold; 
-            box-shadow: 0 0 15px #00d2ff; color: white;
-        }
+        .profile-card { background: linear-gradient(145deg, #1a0b2e, #0d0515); border: 1px solid #7a22b8; border-radius: 20px; padding: 20px; display: flex; align-items: center; gap: 15px; box-shadow: 0 0 20px rgba(122, 34, 184, 0.3); }
+        .avatar { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(45deg, #00d2ff, #3a7bd5); display: flex; justify-content: center; align-items: center; font-size: 28px; font-weight: bold; box-shadow: 0 0 15px #00d2ff; color: white; }
         .user-info h3 { margin: 0 0 5px 0; font-size: 20px; }
         .user-info p { margin: 0; font-size: 13px; color: #a0a0a0; }
         .badge { background: #ffd700; color: black; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: bold; margin-bottom: 5px; display: inline-block; }
         
-        /* Stats Row */
         .stats-row { display: flex; gap: 10px; padding: 0 20px; margin-top: -10px; }
         .stat-box { flex: 1; background: #1c1126; padding: 12px; border-radius: 15px; border: 1px solid #331a4d; display: flex; align-items: center; gap: 10px; }
         .stat-icon { background: #ffd700; color: black; width: 30px; height: 30px; border-radius: 8px; display: flex; justify-content: center; align-items: center; font-size: 18px; }
         .stat-text p { margin: 0; font-size: 12px; color: #aaa; }
         .stat-text h4 { margin: 0; font-size: 16px; }
 
-        /* Channel Join Banner */
         .channel-banner { margin: 20px; background: linear-gradient(90deg, #0f1c3f, #1c0b35); border-radius: 20px; padding: 15px; border: 1px solid #2952a3; display: flex; align-items: center; gap: 15px; }
         .channel-icon { background: #3a7bd5; width: 50px; height: 50px; border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 24px; box-shadow: 0 0 10px #3a7bd5; }
         .channel-text h4 { margin: 0 0 5px 0; font-size: 15px; }
         .channel-text p { margin: 0; font-size: 12px; color: #aaa; }
         .join-btn { margin-top: 10px; background: linear-gradient(90deg, #00d2ff, #3a7bd5); border: none; padding: 8px 15px; border-radius: 20px; color: white; font-weight: bold; font-size: 12px; }
 
-        /* Video Feed */
         .section-title { padding: 0 20px; font-size: 18px; margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
         .video-card { margin: 0 20px 20px 20px; background: #1c1126; border-radius: 20px; overflow: hidden; border: 1px solid #331a4d; }
-        .thumb-container { position: relative; height: 180px; background: #333; display: flex; justify-content: center; align-items: center; }
+        .thumb-container { position: relative; height: 180px; background: #333; display: flex; justify-content: center; align-items: center; background-size: cover; background-position: center; }
         .hot-badge { position: absolute; top: 10px; left: 10px; background: rgba(255, 0, 128, 0.8); padding: 4px 10px; border-radius: 10px; font-size: 10px; font-weight: bold; display: flex; align-items: center; gap: 3px; }
         .play-icon { width: 50px; height: 50px; background: rgba(255,0,0,0.8); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 20px; box-shadow: 0 0 20px rgba(255,0,0,0.6); }
         .video-info { padding: 15px; }
         .video-info h3 { margin: 0 0 10px 0; font-size: 16px; line-height: 1.4; }
         .video-meta { display: flex; justify-content: space-between; color: #aaa; font-size: 12px; margin-bottom: 15px; }
         
-        /* Action Button */
-        .action-btn { 
-            width: 100%; padding: 15px; 
-            background: linear-gradient(90deg, #ff00cc, #333399); 
-            border: none; border-radius: 15px; 
-            color: white; font-size: 16px; font-weight: bold; 
-            text-transform: uppercase;
-            box-shadow: 0 0 15px #ff00cc, 0 0 30px #333399; /* RGB Neon Effect */
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 15px #ff00cc, 0 0 30px #333399; }
-            50% { box-shadow: 0 0 25px #00ffff, 0 0 40px #ff00cc; }
-            100% { box-shadow: 0 0 15px #ff00cc, 0 0 30px #333399; }
-        }
+        .action-btn { width: 100%; padding: 15px; background: linear-gradient(90deg, #ff00cc, #333399); border: none; border-radius: 15px; color: white; font-size: 16px; font-weight: bold; text-transform: uppercase; box-shadow: 0 0 15px #ff00cc, 0 0 30px #333399; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 15px #ff00cc, 0 0 30px #333399; } 50% { box-shadow: 0 0 25px #00ffff, 0 0 40px #ff00cc; } 100% { box-shadow: 0 0 15px #ff00cc, 0 0 30px #333399; } }
 
-        /* Bottom Nav */
         .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #0d0515; border-top: 1px solid #331a4d; display: flex; justify-content: space-around; padding: 15px 0; }
         .nav-item { display: flex; flex-direction: column; align-items: center; color: #666; font-size: 12px; font-weight: bold; gap: 5px; }
         .nav-item.active { color: #ff00cc; text-shadow: 0 0 10px #ff00cc; }
+        
+        .loading-text { text-align: center; color: #ff00cc; padding: 20px; font-size: 14px; }
     </style>
 </head>
 <body>
-    <!-- Profile -->
     <div class="profile-section">
         <div class="profile-card">
             <div class="avatar" id="user-initial">U</div>
@@ -92,25 +59,17 @@
         </div>
     </div>
 
-    <!-- Stats -->
     <div class="stats-row">
         <div class="stat-box">
             <div class="stat-icon">$</div>
-            <div class="stat-text">
-                <h4>0</h4>
-                <p>আপনার কয়েন</p>
-            </div>
+            <div class="stat-text"><h4>0</h4><p>আপনার কয়েন</p></div>
         </div>
         <div class="stat-box">
             <div class="stat-icon" style="background:#ff00cc; color:white;">⚡</div>
-            <div class="stat-text">
-                <h4>0%</h4>
-                <p>রিওয়ার্ড প্রোগ্রেস</p>
-            </div>
+            <div class="stat-text"><h4>0%</h4><p>রিওয়ার্ড প্রোগ্রেস</p></div>
         </div>
     </div>
 
-    <!-- Channel Banner -->
     <div class="channel-banner">
         <div class="channel-icon">✈️</div>
         <div class="channel-text">
@@ -120,25 +79,13 @@
         </div>
     </div>
 
-    <!-- Video Feed -->
     <div class="section-title">🔥 হট ভিডিও</div>
     
-    <div class="video-card">
-        <div class="thumb-container">
-            <div class="hot-badge">🔥 HOT</div>
-            <div class="play-icon">▶</div>
-        </div>
-        <div class="video-info">
-            <h3>16 মিনিট ভিডিও ভার্সাল বিমান বালা দেখতে এখনি চাপ দিন। 👇</h3>
-            <div class="video-meta">
-                <span>👁️ 10K Views</span>
-                <span>Ad 0/6</span>
-            </div>
-            <button class="action-btn">🎁 Watch Ad to Unlock</button>
-        </div>
+    <!-- ভিডিওগুলো এখানে লোড হবে -->
+    <div id="video-container">
+        <p class="loading-text">ভিডিও লোড হচ্ছে...</p>
     </div>
 
-    <!-- Bottom Nav -->
     <div class="bottom-nav">
         <div class="nav-item active">🏠<br>হোম</div>
         <div class="nav-item">🎁<br>রিওয়ার্ড</div>
@@ -148,11 +95,65 @@
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
-        if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
-            document.getElementById('user-name').innerText = tg.initDataUnsafe.user.first_name;
-            document.getElementById('user-id').innerText = '@' + (tg.initDataUnsafe.user.username || 'No_Username');
-            document.getElementById('user-initial').innerText = tg.initDataUnsafe.user.first_name.charAt(0).toUpperCase();
+        
+        // টেলিগ্রাম ইউজারের ডেটা লোড করা
+        setTimeout(() => {
+            if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+                const user = tg.initDataUnsafe.user;
+                document.getElementById('user-name').innerText = user.first_name;
+                document.getElementById('user-id').innerText = user.username ? '@' + user.username : 'No Username';
+                document.getElementById('user-initial').innerText = user.first_name.charAt(0).toUpperCase();
+            }
+        }, 300);
+
+        // ডাটাবেস থেকে ভিডিও লোড করা
+        const API_URL = "https://my-bot-backend.saeidkhan92sk.workers.dev/api/videos";
+
+        async function loadVideos() {
+            try {
+                const response = await fetch(API_URL);
+                const videos = await response.json();
+                const container = document.getElementById('video-container');
+                
+                if(videos.length === 0) {
+                    container.innerHTML = '<p class="loading-text">কোনো ভিডিও পাওয়া যায়নি!</p>';
+                    return;
+                }
+
+                container.innerHTML = ''; // আগের লোডিং টেক্সট মুছে ফেলা
+
+                videos.forEach(video => {
+                    const videoCard = `
+                        <div class="video-card">
+                            <div class="thumb-container" style="background-image: url('${video.thumbnail_url}');">
+                                <div class="hot-badge">🔥 HOT</div>
+                                <div class="play-icon">▶</div>
+                            </div>
+                            <div class="video-info">
+                                <h3>${video.title}</h3>
+                                <div class="video-meta">
+                                    <span>👁️ ${video.views} Views</span>
+                                    <span>Ad 0/6</span>
+                                </div>
+                                <button class="action-btn" onclick="unlockVideo('${video.file_id}')">🎁 Watch Ad to Unlock</button>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += videoCard;
+                });
+            } catch (error) {
+                console.error("Error loading videos:", error);
+                document.getElementById('video-container').innerHTML = '<p class="loading-text">ভিডিও লোড করা যায়নি!</p>';
+            }
         }
+
+        // অ্যাড দেখার ফাংশন (আপাতত ডেমো)
+        function unlockVideo(fileId) {
+            alert("এখানে Monetag এর অ্যাড আসবে! অ্যাড দেখার পর ভিডিও আনলক হবে: " + fileId);
+        }
+
+        // পেজ লোড হলে ভিডিও নিয়ে আসা
+        loadVideos();
     </script>
 </body>
 </html>
