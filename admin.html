@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { margin: 0; padding: 20px; background-color: #0b0410; color: white; }
+        .container { max-width: 500px; margin: 0 auto; background: #1c1126; padding: 20px; border-radius: 15px; border: 1px solid #331a4d; box-shadow: 0 0 20px rgba(122, 34, 184, 0.3); }
+        h2 { text-align: center; color: #ff00cc; text-shadow: 0 0 10px #ff00cc; margin-top: 0; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #aaa; font-size: 14px; }
+        input[type="text"], input[type="number"], input[type="password"] {
+            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #331a4d; background: #0d0515; color: white; font-size: 16px;
+        }
+        input:focus { outline: none; border-color: #ff00cc; box-shadow: 0 0 10px rgba(255, 0, 204, 0.5); }
+        button {
+            width: 100%; padding: 15px; margin-top: 10px; background: linear-gradient(90deg, #ff00cc, #333399); border: none; border-radius: 10px; color: white; font-size: 18px; font-weight: bold; cursor: pointer;
+            box-shadow: 0 0 15px #ff00cc; text-transform: uppercase;
+        }
+        button:active { transform: scale(0.98); }
+        #message { text-align: center; margin-top: 15px; font-weight: bold; }
+        .success { color: #00ff00; }
+        .error { color: #ff3333; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Admin Panel</h2>
+        <div class="form-group">
+            <label>Admin Password</label>
+            <input type="password" id="password" placeholder="Enter admin password">
+        </div>
+        <div class="form-group">
+            <label>Video Title</label>
+            <input type="text" id="title" placeholder="e.g. GTA V Gameplay">
+        </div>
+        <div class="form-group">
+            <label>Thumbnail URL (Image Link)</label>
+            <input type="text" id="thumbnail" placeholder="https://example.com/image.jpg">
+        </div>
+        <div class="form-group">
+            <label>Telegram File ID / Link</label>
+            <input type="text" id="file_id" placeholder="Enter file_id from storage bot">
+        </div>
+        <div class="form-group">
+            <label>Fake Views</label>
+            <input type="number" id="views" placeholder="e.g. 10000" value="10000">
+        </div>
+        <button onclick="addVideo()">Add Video</button>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        const API_URL = "https://my-bot-backend.saeidkhan92sk.workers.dev/api/add-video";
+
+        async function addVideo() {
+            const password = document.getElementById('password').value;
+            const title = document.getElementById('title').value;
+            const thumbnail = document.getElementById('thumbnail').value;
+            const file_id = document.getElementById('file_id').value;
+            const views = document.getElementById('views').value;
+            const messageDiv = document.getElementById('message');
+
+            if (!password || !title || !thumbnail || !file_id) {
+                messageDiv.className = 'error';
+                messageDiv.innerText = 'সব ঘর পূরণ করুন!';
+                return;
+            }
+
+            messageDiv.className = '';
+            messageDiv.innerText = 'Adding...';
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password, title, thumbnail, file_id, views: parseInt(views) })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    messageDiv.className = 'success';
+                    messageDiv.innerText = 'ভিডিও সফলভাবে যোগ হয়েছে!';
+                    document.getElementById('title').value = '';
+                    document.getElementById('thumbnail').value = '';
+                    document.getElementById('file_id').value = '';
+                } else {
+                    messageDiv.className = 'error';
+                    messageDiv.innerText = data.error || 'কিছু ভুল হয়েছে!';
+                }
+            } catch (error) {
+                messageDiv.className = 'error';
+                messageDiv.innerText = 'সার্ভারের সাথে কানেক্ট করা যাচ্ছে না!';
+            }
+        }
+    </script>
+</body>
+      </html>
