@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaming App</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <!-- Monetag SDK (আপনার আসল Zone ID: 3594265) -->
+    <script src='//libtl.com/sdk.js' data-zone='3594265' data-sdk='show_3594265'></script>
     <style>
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { margin: 0; padding: 0; background-color: #0b0410; color: white; padding-bottom: 80px; }
@@ -37,14 +39,13 @@
         .video-info h3 { margin: 0 0 10px 0; font-size: 16px; line-height: 1.4; }
         .video-meta { display: flex; justify-content: space-between; color: #aaa; font-size: 12px; margin-bottom: 15px; }
         
-        .action-btn { width: 100%; padding: 15px; background: linear-gradient(90deg, #ff00cc, #333399); border: none; border-radius: 15px; color: white; font-size: 16px; font-weight: bold; text-transform: uppercase; box-shadow: 0 0 15px #ff00cc, 0 0 30px #333399; animation: pulse 2s infinite; }
+        .action-btn { width: 100%; padding: 15px; background: linear-gradient(90deg, #ff00cc, #333399); border: none; border-radius: 15px; color: white; font-size: 16px; font-weight: bold; text-transform: uppercase; box-shadow: 0 0 15px #ff00cc, 0 0 30px #333399; animation: pulse 2s infinite; cursor: pointer; }
         @keyframes pulse { 0% { box-shadow: 0 0 15px #ff00cc, 0 0 30px #333399; } 50% { box-shadow: 0 0 25px #00ffff, 0 0 40px #ff00cc; } 100% { box-shadow: 0 0 15px #ff00cc, 0 0 30px #333399; } }
 
-        /* বাটনগুলো বড় এবং সুন্দর করা হয়েছে */
         .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #0d0515; border-top: 1px solid #331a4d; display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; }
         .nav-item { display: flex; flex-direction: column; align-items: center; color: #888; font-size: 13px; font-weight: bold; gap: 5px; }
         .nav-item.active { color: #ff00cc; text-shadow: 0 0 10px #ff00cc; }
-        .nav-item span { font-size: 20px; } /* আইকন বড় করা হয়েছে */
+        .nav-item span { font-size: 20px; }
         
         .loading-text { text-align: center; color: #ff00cc; padding: 20px; font-size: 14px; }
     </style>
@@ -87,7 +88,6 @@
         <p class="loading-text">ভিডিও লোড হচ্ছে...</p>
     </div>
 
-    <!-- নেভিগেশন বার -->
     <div class="bottom-nav">
         <div class="nav-item active"><span>🏠</span>হোম</div>
         <div class="nav-item"><span>🎁</span>রিওয়ার্ড</div>
@@ -146,8 +146,26 @@
             }
         }
 
-        function unlockVideo(fileId) {
-            alert("এখানে Monetag এর অ্যাড আসবে! অ্যাড দেখার পর ভিডিও আনলক হবে: " + fileId);
+        // Monetag Ad Integration (আপনার আসল Zone ID: 3594265)
+        async function unlockVideo(fileId) {
+            if (typeof window.show_3594265 === 'function') {
+                try {
+                    const userId = (tg.initDataUnsafe && tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.id : 0;
+                    const result = await window.show_3594265({ ymid: userId });
+                    
+                    if (result && result.reward_event_type === 'valued') {
+                        alert("অ্যাড সফলভাবে দেখা হয়েছে! এখন ভিডিওটি আনলক হবে: " + fileId);
+                        // এখানে পরবর্তী ধাপে ভিডিও আনলক করার লজিক বসবে
+                    } else {
+                        alert("অ্যাড সম্পূর্ণ দেখা হয়নি, দয়া করে আবার চেষ্টা করুন।");
+                    }
+                } catch (error) {
+                    console.error("Ad error:", error);
+                    alert("অ্যাড লোড করতে সমস্যা হয়েছে। ইন্টারনেট চেক করুন।");
+                }
+            } else {
+                alert("অ্যাড সার্ভিস লোড হচ্ছে, একটু পরে আবার চেষ্টা করুন।");
+            }
         }
 
         loadVideos();
