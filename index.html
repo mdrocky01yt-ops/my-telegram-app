@@ -7,7 +7,7 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { margin: 0; padding: 0; background-color: #0b0410; color: white; padding-bottom: 60px; }
+        body { margin: 0; padding: 0; background-color: #0b0410; color: white; padding-bottom: 80px; }
         
         .profile-section { padding: 20px; }
         .profile-card { background: linear-gradient(145deg, #1a0b2e, #0d0515); border: 1px solid #7a22b8; border-radius: 20px; padding: 20px; display: flex; align-items: center; gap: 15px; box-shadow: 0 0 20px rgba(122, 34, 184, 0.3); }
@@ -40,10 +40,11 @@
         .action-btn { width: 100%; padding: 15px; background: linear-gradient(90deg, #ff00cc, #333399); border: none; border-radius: 15px; color: white; font-size: 16px; font-weight: bold; text-transform: uppercase; box-shadow: 0 0 15px #ff00cc, 0 0 30px #333399; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 15px #ff00cc, 0 0 30px #333399; } 50% { box-shadow: 0 0 25px #00ffff, 0 0 40px #ff00cc; } 100% { box-shadow: 0 0 15px #ff00cc, 0 0 30px #333399; } }
 
-        /* বাটনগুলো ছোট এবং সুন্দর করা হয়েছে */
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #0d0515; border-top: 1px solid #331a4d; display: flex; justify-content: space-around; padding: 8px 0; padding-bottom: env(safe-area-inset-bottom); z-index: 1000; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; color: #666; font-size: 11px; font-weight: bold; gap: 2px; }
+        /* বাটনগুলো বড় এবং সুন্দর করা হয়েছে */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #0d0515; border-top: 1px solid #331a4d; display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; color: #888; font-size: 13px; font-weight: bold; gap: 5px; }
         .nav-item.active { color: #ff00cc; text-shadow: 0 0 10px #ff00cc; }
+        .nav-item span { font-size: 20px; } /* আইকন বড় করা হয়েছে */
         
         .loading-text { text-align: center; color: #ff00cc; padding: 20px; font-size: 14px; }
     </style>
@@ -86,10 +87,11 @@
         <p class="loading-text">ভিডিও লোড হচ্ছে...</p>
     </div>
 
+    <!-- নেভিগেশন বার -->
     <div class="bottom-nav">
-        <div class="nav-item active">🏠<br>হোম</div>
-        <div class="nav-item">🎁<br>রিওয়ার্ড</div>
-        <div class="nav-item">✈️<br>চ্যানেল</div>
+        <div class="nav-item active"><span>🏠</span>হোম</div>
+        <div class="nav-item"><span>🎁</span>রিওয়ার্ড</div>
+        <div class="nav-item"><span>✈️</span>চ্যানেল</div>
     </div>
 
     <script>
@@ -140,8 +142,6 @@
                     container.innerHTML += videoCard;
                 });
             } catch (error) {
-                console.error("Error loading videos:", error);
-                // এরর আসলে কী কারণ তা দেখানোর জন্য
                 document.getElementById('video-container').innerHTML = `<p class="loading-text">ভিডিও লোড করা যায়নি! এরর: ${error.message}</p>`;
             }
         }
