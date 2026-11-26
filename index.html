@@ -11,25 +11,32 @@
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { margin: 0; padding: 0; background-color: #0b0410; color: white; padding-bottom: 80px; }
         
+        /* Profile Section */
         .profile-section { padding: 20px; }
-        .profile-card { background: linear-gradient(145deg, #1a0b2e, #0d0515); border: 1px solid #7a22b8; border-radius: 20px; padding: 20px; display: flex; align-items: center; gap: 15px; box-shadow: 0 0 20px rgba(122, 34, 184, 0.3); }
+        .profile-card { background: linear-gradient(145deg, #1a0b2e, #0d0515); border: 1px solid #7a22b8; border-radius: 20px; padding: 20px; display: flex; align-items: center; gap: 15px; box-shadow: 0 0 20px rgba(122, 34, 184, 0.3); position: relative; }
         .avatar { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(45deg, #00d2ff, #3a7bd5); display: flex; justify-content: center; align-items: center; font-size: 28px; font-weight: bold; box-shadow: 0 0 15px #00d2ff; color: white; }
         .user-info h3 { margin: 0 0 5px 0; font-size: 20px; }
         .user-info p { margin: 0; font-size: 13px; color: #a0a0a0; }
         .badge { background: #ffd700; color: black; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: bold; margin-bottom: 5px; display: inline-block; }
         
+        /* Admin Button (Top Right of Profile) */
+        .admin-btn { display: none; position: absolute; top: 15px; right: 15px; background: #ff00cc; border: none; padding: 8px 12px; border-radius: 10px; color: white; font-weight: bold; font-size: 12px; box-shadow: 0 0 10px #ff00cc; cursor: pointer; }
+
+        /* Stats Row */
         .stats-row { display: flex; gap: 10px; padding: 0 20px; margin-top: -10px; }
         .stat-box { flex: 1; background: #1c1126; padding: 12px; border-radius: 15px; border: 1px solid #331a4d; display: flex; align-items: center; gap: 10px; }
         .stat-icon { background: #ffd700; color: black; width: 30px; height: 30px; border-radius: 8px; display: flex; justify-content: center; align-items: center; font-size: 18px; }
         .stat-text p { margin: 0; font-size: 12px; color: #aaa; }
         .stat-text h4 { margin: 0; font-size: 16px; }
 
+        /* Channel Join Banner */
         .channel-banner { margin: 20px; background: linear-gradient(90deg, #0f1c3f, #1c0b35); border-radius: 20px; padding: 15px; border: 1px solid #2952a3; display: flex; align-items: center; gap: 15px; }
         .channel-icon { background: #3a7bd5; width: 50px; height: 50px; border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 24px; box-shadow: 0 0 10px #3a7bd5; }
         .channel-text h4 { margin: 0 0 5px 0; font-size: 15px; }
         .channel-text p { margin: 0; font-size: 12px; color: #aaa; }
         .join-btn { margin-top: 10px; background: linear-gradient(90deg, #00d2ff, #3a7bd5); border: none; padding: 8px 15px; border-radius: 20px; color: white; font-weight: bold; font-size: 12px; }
 
+        /* Video Feed */
         .section-title { padding: 0 20px; font-size: 18px; margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
         .video-card { margin: 0 20px 20px 20px; background: #1c1126; border-radius: 20px; overflow: hidden; border: 1px solid #331a4d; }
         .thumb-container { position: relative; height: 180px; background: #333; display: flex; justify-content: center; align-items: center; background-size: cover; background-position: center; }
@@ -39,75 +46,126 @@
         .video-info h3 { margin: 0 0 10px 0; font-size: 16px; line-height: 1.4; }
         .video-meta { display: flex; justify-content: space-between; color: #aaa; font-size: 12px; margin-bottom: 15px; }
         
+        /* Action Button */
         .action-btn { width: 100%; padding: 15px; background: linear-gradient(90deg, #ff00cc, #333399); border: none; border-radius: 15px; color: white; font-size: 16px; font-weight: bold; text-transform: uppercase; box-shadow: 0 0 15px #ff00cc, 0 0 30px #333399; animation: pulse 2s infinite; cursor: pointer; }
         @keyframes pulse { 0% { box-shadow: 0 0 15px #ff00cc, 0 0 30px #333399; } 50% { box-shadow: 0 0 25px #00ffff, 0 0 40px #ff00cc; } 100% { box-shadow: 0 0 15px #ff00cc, 0 0 30px #333399; } }
 
+        /* Bottom Nav */
         .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #0d0515; border-top: 1px solid #331a4d; display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; }
         .nav-item { display: flex; flex-direction: column; align-items: center; color: #888; font-size: 13px; font-weight: bold; gap: 5px; }
         .nav-item.active { color: #ff00cc; text-shadow: 0 0 10px #ff00cc; }
         .nav-item span { font-size: 20px; }
         
         .loading-text { text-align: center; color: #ff00cc; padding: 20px; font-size: 14px; }
+
+        /* Hidden Admin Panel Overlay */
+        #admin-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0b0410; z-index: 2000; padding: 20px; overflow-y: auto; }
+        .admin-form { background: #1c1126; padding: 20px; border-radius: 15px; border: 1px solid #331a4d; }
+        .admin-form h2 { text-align: center; color: #ff00cc; margin-top: 0; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; color: #aaa; font-size: 14px; }
+        .form-group input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #331a4d; background: #0d0515; color: white; font-size: 16px; }
+        .form-group input:focus { outline: none; border-color: #ff00cc; }
+        .close-admin { background: #ff3333; color: white; border: none; padding: 10px 15px; border-radius: 8px; font-weight: bold; margin-bottom: 15px; cursor: pointer; }
     </style>
 </head>
 <body>
-    <div class="profile-section">
-        <div class="profile-card">
-            <div class="avatar" id="user-initial">U</div>
-            <div class="user-info">
-                <div class="badge">👑 VERIFIED MEMBER</div>
-                <h3 id="user-name">লোড হচ্ছে...</h3>
-                <p id="user-id">@username</p>
+    <!-- Main App View -->
+    <div id="main-app">
+        <div class="profile-section">
+            <div class="profile-card">
+                <div class="avatar" id="user-initial">U</div>
+                <div class="user-info">
+                    <div class="badge">👑 VERIFIED MEMBER</div>
+                    <h3 id="user-name">লোড হচ্ছে...</h3>
+                    <p id="user-id">@username</p>
+                </div>
+                <!-- Admin button, only visible to you -->
+                <button class="admin-btn" id="admin-toggle" onclick="openAdmin()">⚙️ Admin</button>
             </div>
         </div>
-    </div>
 
-    <div class="stats-row">
-        <div class="stat-box">
-            <div class="stat-icon">$</div>
-            <div class="stat-text"><h4>0</h4><p>আপনার কয়েন</p></div>
+        <div class="stats-row">
+            <div class="stat-box">
+                <div class="stat-icon">$</div>
+                <div class="stat-text"><h4>0</h4><p>আপনার কয়েন</p></div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-icon" style="background:#ff00cc; color:white;">⚡</div>
+                <div class="stat-text"><h4>0%</h4><p>রিওয়ার্ড প্রোগ্রেস</p></div>
+            </div>
         </div>
-        <div class="stat-box">
-            <div class="stat-icon" style="background:#ff00cc; color:white;">⚡</div>
-            <div class="stat-text"><h4>0%</h4><p>রিওয়ার্ড প্রোগ্রেস</p></div>
+
+        <div class="channel-banner">
+            <div class="channel-icon">✈️</div>
+            <div class="channel-text">
+                <h4>প্রিমিয়াম চ্যানেল Join করুন</h4>
+                <p>নতুন ভিডিও ও আপডেট সবার আগে পান</p>
+                <button class="join-btn">JOIN CHANNEL</button>
+            </div>
+        </div>
+
+        <div class="section-title">🔥 হট ভিডিও</div>
+        <div id="video-container"><p class="loading-text">ভিডিও লোড হচ্ছে...</p></div>
+
+        <div class="bottom-nav">
+            <div class="nav-item active"><span>🏠</span>হোম</div>
+            <div class="nav-item"><span>🎁</span>রিওয়ার্ড</div>
+            <div class="nav-item"><span>✈️</span>চ্যানেল</div>
         </div>
     </div>
 
-    <div class="channel-banner">
-        <div class="channel-icon">✈️</div>
-        <div class="channel-text">
-            <h4>প্রিমিয়াম চ্যানেল Join করুন</h4>
-            <p>নতুন ভিডিও ও আপডেট সবার আগে পান</p>
-            <button class="join-btn">JOIN CHANNEL</button>
+    <!-- Hidden Admin Panel View -->
+    <div id="admin-overlay">
+        <button class="close-admin" onclick="closeAdmin()">❌ বন্ধ করুন</button>
+        <div class="admin-form">
+            <h2>Admin Panel</h2>
+            <div class="form-group">
+                <label>Video Title</label>
+                <input type="text" id="admin-title" placeholder="e.g. GTA V Gameplay">
+            </div>
+            <div class="form-group">
+                <label>Thumbnail URL</label>
+                <input type="text" id="admin-thumb" placeholder="https://example.com/image.jpg">
+            </div>
+            <div class="form-group">
+                <label>Telegram File ID</label>
+                <input type="text" id="admin-fileid" placeholder="Enter file_id">
+            </div>
+            <div class="form-group">
+                <label>Fake Views</label>
+                <input type="number" id="admin-views" placeholder="e.g. 10000" value="10000">
+            </div>
+            <button class="action-btn" onclick="addVideo()" id="add-btn">Add Video</button>
+            <p id="admin-msg" style="text-align: center; margin-top: 10px; font-weight: bold;"></p>
         </div>
-    </div>
-
-    <div class="section-title">🔥 হট ভিডিও</div>
-    
-    <div id="video-container">
-        <p class="loading-text">ভিডিও লোড হচ্ছে...</p>
-    </div>
-
-    <div class="bottom-nav">
-        <div class="nav-item active"><span>🏠</span>হোম</div>
-        <div class="nav-item"><span>🎁</span>রিওয়ার্ড</div>
-        <div class="nav-item"><span>✈️</span>চ্যানেল</div>
     </div>
 
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
         
+        const ADMIN_ID = "9260106248"; // আপনার টেলিগ্রাম আইডি
+        let currentUserId = 0;
+
         setTimeout(() => {
             if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
                 const user = tg.initDataUnsafe.user;
+                currentUserId = user.id;
+                
                 document.getElementById('user-name').innerText = user.first_name;
                 document.getElementById('user-id').innerText = user.username ? '@' + user.username : 'No Username';
                 document.getElementById('user-initial').innerText = user.first_name.charAt(0).toUpperCase();
+
+                // যদি আপনার আইডি হয়, তবেই অ্যাডমিন বাটন দেখাবে
+                if (user.id.toString() === ADMIN_ID) {
+                    document.getElementById('admin-toggle').style.display = 'block';
+                }
             }
         }, 300);
 
         const API_URL = "https://my-bot-backend.saeidkhan92sk.workers.dev/api/videos";
+        const ADD_API_URL = "https://my-bot-backend.saeidkhan92sk.workers.dev/api/add-video";
 
         async function loadVideos() {
             try {
@@ -123,7 +181,6 @@
                 container.innerHTML = ''; 
 
                 videos.forEach(video => {
-                    // এখানে video.id পাঠানো হচ্ছে যাতে সার্ভার ডাটাবেসে টোকেন তৈরি করতে পারে
                     const videoCard = `
                         <div class="video-card">
                             <div class="thumb-container" style="background-image: url('${video.thumbnail_url}');">
@@ -147,38 +204,68 @@
             }
         }
 
-        // Monetag Ad Integration + Token Generation
-        async function unlockVideo(videoId) {
-            if (typeof window.show_3594265 === 'function') {
-                try {
-                    const userId = (tg.initDataUnsafe && tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.id : 0;
-                    const result = await window.show_3594265({ ymid: userId });
-                    
-                    if (result && result.reward_event_type === 'valued') {
-                        // অ্যাড সফল হলে সার্ভারে টোকেন তৈরির রিকোয়েস্ট পাঠানো
-                        const unlockReq = await fetch("https://my-bot-backend.saeidkhan92sk.workers.dev/api/unlock-video", {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ userId: userId, videoId: videoId })
-                        });
-                        
-                        const unlockData = await unlockReq.json();
-                        
-                        if (unlockData.success && unlockData.botLink) {
-                            // ইউজারকে স্টোরেজ বটে পাঠানো
-                            window.location.href = unlockData.botLink;
-                        } else {
-                            alert("টোকেন তৈরি করতে সমস্যা হয়েছে।");
-                        }
-                    } else {
-                        alert("অ্যাড সম্পূর্ণ দেখা হয়নি, দয়া করে আবার চেষ্টা করুন।");
-                    }
-                } catch (error) {
-                    console.error("Monetag Error:", error);
-                    alert("অ্যাড লোড করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+        // অ্যাডমিন প্যানেল ওপেন/ক্লোজ
+        function openAdmin() { document.getElementById('admin-overlay').style.display = 'block'; }
+        function closeAdmin() { document.getElementById('admin-overlay').style.display = 'none'; }
+
+        // অ্যাডমিন প্যানেল থেকে ভিডিও যোগ করা
+        async function addVideo() {
+            const title = document.getElementById('admin-title').value;
+            const thumbnail = document.getElementById('admin-thumb').value;
+            const file_id = document.getElementById('admin-fileid').value;
+            const views = document.getElementById('admin-views').value;
+            const msg = document.getElementById('admin-msg');
+
+            if (!title || !thumbnail || !file_id) {
+                msg.style.color = 'red';
+                msg.innerText = 'সব ঘর পূরণ করুন!';
+                return;
+            }
+
+            msg.style.color = 'yellow';
+            msg.innerText = 'যোগ হচ্ছে...';
+
+            try {
+                const res = await fetch(ADD_API_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ password: "admin123", title, thumbnail, file_id, views: parseInt(views) })
+                });
+
+                if (res.ok) {
+                    msg.style.color = '#00ff00';
+                    msg.innerText = 'ভিডিও সফলভাবে যোগ হয়েছে!';
+                    document.getElementById('admin-title').value = '';
+                    document.getElementById('admin-thumb').value = '';
+                    document.getElementById('admin-fileid').value = '';
+                    loadVideos(); // লিস্ট রিফ্রেশ
+                } else {
+                    const data = await res.json();
+                    msg.style.color = 'red';
+                    msg.innerText = data.error || 'সমস্যা হয়েছে!';
                 }
+            } catch (err) {
+                msg.style.color = 'red';
+                msg.innerText = 'সার্ভারে সমস্যা!';
+            }
+        }
+
+        // ভিডিও আনলক (টেস্টিং মোড - অ্যাড বাইপাস)
+        async function unlockVideo(videoId) {
+            alert("টেস্টিং মোড: অ্যাড বাইপাস করা হয়েছে। এখন স্টোরেজ বটে পাঠানো হচ্ছে...");
+            
+            const unlockReq = await fetch("https://my-bot-backend.saeidkhan92sk.workers.dev/api/unlock-video", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ userId: currentUserId, videoId: videoId })
+            });
+            
+            const unlockData = await unlockReq.json();
+            
+            if (unlockData.success && unlockData.botLink) {
+                window.location.href = unlockData.botLink;
             } else {
-                alert("অ্যাড সার্ভিস লোড হচ্ছে, একটু পরে আবার চেষ্টা করুন।");
+                alert("টোকেন তৈরি করতে সমস্যা হয়েছে।");
             }
         }
 
