@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaming App</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <!-- Monetag SDK (আপনার আসল Zone ID) -->
     <script src='https://libtl.com/sdk.js' data-zone='3594265' data-sdk='show_3594265'></script>
     <style>
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { margin: 0; padding: 0; background-color: #0b0410; color: white; padding-bottom: 80px; }
         
-        /* Profile Section */
         .profile-section { padding: 20px; }
         .profile-card { background: linear-gradient(145deg, #1a0b2e, #0d0515); border: 1px solid #7a22b8; border-radius: 20px; padding: 20px; display: flex; align-items: center; gap: 15px; box-shadow: 0 0 20px rgba(122, 34, 184, 0.3); position: relative; }
         .avatar { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(45deg, #00d2ff, #3a7bd5); display: flex; justify-content: center; align-items: center; font-size: 28px; font-weight: bold; box-shadow: 0 0 15px #00d2ff; color: white; }
@@ -19,24 +17,20 @@
         .user-info p { margin: 0; font-size: 13px; color: #a0a0a0; }
         .badge { background: #ffd700; color: black; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: bold; margin-bottom: 5px; display: inline-block; }
         
-        /* Admin Button (Top Right of Profile) */
         .admin-btn { display: none; position: absolute; top: 15px; right: 15px; background: #ff00cc; border: none; padding: 8px 12px; border-radius: 10px; color: white; font-weight: bold; font-size: 12px; box-shadow: 0 0 10px #ff00cc; cursor: pointer; }
 
-        /* Stats Row */
         .stats-row { display: flex; gap: 10px; padding: 0 20px; margin-top: -10px; }
         .stat-box { flex: 1; background: #1c1126; padding: 12px; border-radius: 15px; border: 1px solid #331a4d; display: flex; align-items: center; gap: 10px; }
         .stat-icon { background: #ffd700; color: black; width: 30px; height: 30px; border-radius: 8px; display: flex; justify-content: center; align-items: center; font-size: 18px; }
         .stat-text p { margin: 0; font-size: 12px; color: #aaa; }
         .stat-text h4 { margin: 0; font-size: 16px; }
 
-        /* Channel Join Banner */
         .channel-banner { margin: 20px; background: linear-gradient(90deg, #0f1c3f, #1c0b35); border-radius: 20px; padding: 15px; border: 1px solid #2952a3; display: flex; align-items: center; gap: 15px; }
         .channel-icon { background: #3a7bd5; width: 50px; height: 50px; border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 24px; box-shadow: 0 0 10px #3a7bd5; }
         .channel-text h4 { margin: 0 0 5px 0; font-size: 15px; }
         .channel-text p { margin: 0; font-size: 12px; color: #aaa; }
         .join-btn { margin-top: 10px; background: linear-gradient(90deg, #00d2ff, #3a7bd5); border: none; padding: 8px 15px; border-radius: 20px; color: white; font-weight: bold; font-size: 12px; }
 
-        /* Video Feed */
         .section-title { padding: 0 20px; font-size: 18px; margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
         .video-card { margin: 0 20px 20px 20px; background: #1c1126; border-radius: 20px; overflow: hidden; border: 1px solid #331a4d; }
         .thumb-container { position: relative; height: 180px; background: #333; display: flex; justify-content: center; align-items: center; background-size: cover; background-position: center; }
@@ -46,11 +40,9 @@
         .video-info h3 { margin: 0 0 10px 0; font-size: 16px; line-height: 1.4; }
         .video-meta { display: flex; justify-content: space-between; color: #aaa; font-size: 12px; margin-bottom: 15px; }
         
-        /* Action Button */
         .action-btn { width: 100%; padding: 15px; background: linear-gradient(90deg, #ff00cc, #333399); border: none; border-radius: 15px; color: white; font-size: 16px; font-weight: bold; text-transform: uppercase; box-shadow: 0 0 15px #ff00cc, 0 0 30px #333399; animation: pulse 2s infinite; cursor: pointer; }
         @keyframes pulse { 0% { box-shadow: 0 0 15px #ff00cc, 0 0 30px #333399; } 50% { box-shadow: 0 0 25px #00ffff, 0 0 40px #ff00cc; } 100% { box-shadow: 0 0 15px #ff00cc, 0 0 30px #333399; } }
 
-        /* Bottom Nav */
         .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #0d0515; border-top: 1px solid #331a4d; display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; }
         .nav-item { display: flex; flex-direction: column; align-items: center; color: #888; font-size: 13px; font-weight: bold; gap: 5px; }
         .nav-item.active { color: #ff00cc; text-shadow: 0 0 10px #ff00cc; }
@@ -58,7 +50,6 @@
         
         .loading-text { text-align: center; color: #ff00cc; padding: 20px; font-size: 14px; }
 
-        /* Hidden Admin Panel Overlay */
         #admin-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0b0410; z-index: 2000; padding: 20px; overflow-y: auto; }
         .admin-form { background: #1c1126; padding: 20px; border-radius: 15px; border: 1px solid #331a4d; }
         .admin-form h2 { text-align: center; color: #ff00cc; margin-top: 0; }
@@ -66,11 +57,11 @@
         .form-group label { display: block; margin-bottom: 5px; color: #aaa; font-size: 14px; }
         .form-group input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #331a4d; background: #0d0515; color: white; font-size: 16px; }
         .form-group input:focus { outline: none; border-color: #ff00cc; }
+        .form-group input[type="file"] { background: #1c1126; border: none; padding: 10px 0; }
         .close-admin { background: #ff3333; color: white; border: none; padding: 10px 15px; border-radius: 8px; font-weight: bold; margin-bottom: 15px; cursor: pointer; }
     </style>
 </head>
 <body>
-    <!-- Main App View -->
     <div id="main-app">
         <div class="profile-section">
             <div class="profile-card">
@@ -80,7 +71,6 @@
                     <h3 id="user-name">লোড হচ্ছে...</h3>
                     <p id="user-id">@username</p>
                 </div>
-                <!-- Admin button, only visible to you -->
                 <button class="admin-btn" id="admin-toggle" onclick="openAdmin()">⚙️ Admin</button>
             </div>
         </div>
@@ -115,18 +105,24 @@
         </div>
     </div>
 
-    <!-- Hidden Admin Panel View -->
     <div id="admin-overlay">
         <button class="close-admin" onclick="closeAdmin()">❌ বন্ধ করুন</button>
         <div class="admin-form">
             <h2>Admin Panel</h2>
+            
+            <!-- ইমেজবিবি API Key এর ঘর -->
+            <div class="form-group">
+                <label>ImgBB API Key (একবার সেভ করলেই হবে)</label>
+                <input type="text" id="admin-imgbb-key" placeholder="Paste your ImgBB API Key here">
+            </div>
+
             <div class="form-group">
                 <label>Video Title</label>
                 <input type="text" id="admin-title" placeholder="e.g. GTA V Gameplay">
             </div>
             <div class="form-group">
-                <label>Thumbnail URL</label>
-                <input type="text" id="admin-thumb" placeholder="https://example.com/image.jpg">
+                <label>Thumbnail (Gallery from Phone)</label>
+                <input type="file" id="admin-thumb-file" accept="image/*">
             </div>
             <div class="form-group">
                 <label>Telegram File ID</label>
@@ -145,23 +141,24 @@
         let tg = window.Telegram.WebApp;
         tg.expand();
         
-        const ADMIN_ID = "9260106248"; // আপনার টেলিগ্রাম আইডি
+        const ADMIN_ID = "9260106248";
         let currentUserId = 0;
 
         setTimeout(() => {
             if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
                 const user = tg.initDataUnsafe.user;
                 currentUserId = user.id;
-                
                 document.getElementById('user-name').innerText = user.first_name;
                 document.getElementById('user-id').innerText = user.username ? '@' + user.username : 'No Username';
                 document.getElementById('user-initial').innerText = user.first_name.charAt(0).toUpperCase();
-
-                // যদি আপনার আইডি হয়, তবেই অ্যাডমিন বাটন দেখাবে
                 if (user.id.toString() === ADMIN_ID) {
                     document.getElementById('admin-toggle').style.display = 'block';
                 }
             }
+            
+            // লোকাল স্টোরেজ থেকে ইমেজবিবি কী লোড করা (যাতে বারবার দিতে না হয়)
+            const savedKey = localStorage.getItem('imgbb_key');
+            if(savedKey) document.getElementById('admin-imgbb-key').value = savedKey;
         }, 300);
 
         const API_URL = "https://my-bot-backend.saeidkhan92sk.workers.dev/api/videos";
@@ -204,53 +201,75 @@
             }
         }
 
-        // অ্যাডমিন প্যানেল ওপেন/ক্লোজ
         function openAdmin() { document.getElementById('admin-overlay').style.display = 'block'; }
         function closeAdmin() { document.getElementById('admin-overlay').style.display = 'none'; }
 
-        // অ্যাডমিন প্যানেল থেকে ভিডিও যোগ করা
         async function addVideo() {
+            const imgbbKey = document.getElementById('admin-imgbb-key').value;
             const title = document.getElementById('admin-title').value;
-            const thumbnail = document.getElementById('admin-thumb').value;
+            const fileInput = document.getElementById('admin-thumb-file');
             const file_id = document.getElementById('admin-fileid').value;
             const views = document.getElementById('admin-views').value;
             const msg = document.getElementById('admin-msg');
 
-            if (!title || !thumbnail || !file_id) {
+            if (!imgbbKey || !title || fileInput.files.length === 0 || !file_id) {
                 msg.style.color = 'red';
-                msg.innerText = 'সব ঘর পূরণ করুন!';
+                msg.innerText = 'সব ঘর পূরণ করুন, API Key দিন এবং ছবি সিলেক্ট করুন!';
                 return;
             }
 
+            // API Key সেভ করে রাখা
+            localStorage.setItem('imgbb_key', imgbbKey);
+
             msg.style.color = 'yellow';
-            msg.innerText = 'যোগ হচ্ছে...';
+            msg.innerText = 'ছবি আপলোড হচ্ছে (ImgBB)...';
 
             try {
+                // ImgBB-তে ছবি আপলোড
+                const formData = new FormData();
+                formData.append('image', fileInput.files[0]);
+
+                const imgbbRes = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const imgbbData = await imgbbRes.json();
+                
+                if (!imgbbData.success) {
+                    msg.style.color = 'red';
+                    msg.innerText = 'ImgBB তে ছবি আপলোড হয়নি! API Key চেক করুন।';
+                    return;
+                }
+
+                const imageUrl = imgbbData.data.url; // ছবির লিংক
+
+                msg.innerText = 'ভিডিও ডাটাবেসে যোগ হচ্ছে...';
+
+                // ডাটাবেসে ডেটা পাঠানো
                 const res = await fetch(ADD_API_URL, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ password: "admin123", title, thumbnail, file_id, views: parseInt(views) })
+                    body: JSON.stringify({ password: "admin123", title, thumbnail: imageUrl, file_id, views: parseInt(views) })
                 });
 
                 if (res.ok) {
                     msg.style.color = '#00ff00';
                     msg.innerText = 'ভিডিও সফলভাবে যোগ হয়েছে!';
                     document.getElementById('admin-title').value = '';
-                    document.getElementById('admin-thumb').value = '';
+                    document.getElementById('admin-thumb-file').value = '';
                     document.getElementById('admin-fileid').value = '';
-                    loadVideos(); // লিস্ট রিফ্রেশ
+                    loadVideos();
                 } else {
-                    const data = await res.json();
                     msg.style.color = 'red';
-                    msg.innerText = data.error || 'সমস্যা হয়েছে!';
+                    msg.innerText = 'ডাটাবেসে সেভ করা যায়নি!';
                 }
             } catch (err) {
                 msg.style.color = 'red';
-                msg.innerText = 'সার্ভারে সমস্যা!';
+                msg.innerText = 'সার্ভারে সমস্যা হয়েছে!';
             }
         }
 
-        // ভিডিও আনলক (টেস্টিং মোড - অ্যাড বাইপাস)
         async function unlockVideo(videoId) {
             alert("টেস্টিং মোড: অ্যাড বাইপাস করা হয়েছে। এখন স্টোরেজ বটে পাঠানো হচ্ছে...");
             
