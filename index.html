@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaming App</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <!-- Monetag SDK (আপনার আসল Zone ID: 3594265) -->
-    <script src='//libtl.com/sdk.js' data-zone='3594265' data-sdk='show_3594265'></script>
+    <!-- Monetag SDK (আপনার আসল Zone ID) -->
+    <script src='https://libtl.com/sdk.js' data-zone='3594265' data-sdk='show_3594265'></script>
     <style>
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { margin: 0; padding: 0; background-color: #0b0410; color: white; padding-bottom: 80px; }
@@ -123,6 +123,7 @@
                 container.innerHTML = ''; 
 
                 videos.forEach(video => {
+                    // এখানে video.id পাঠানো হচ্ছে যাতে সার্ভার ডাটাবেসে টোকেন তৈরি করতে পারে
                     const videoCard = `
                         <div class="video-card">
                             <div class="thumb-container" style="background-image: url('${video.thumbnail_url}');">
@@ -135,7 +136,7 @@
                                     <span>👁️ ${video.views} Views</span>
                                     <span>Ad 0/6</span>
                                 </div>
-                                <button class="action-btn" onclick="unlockVideo('${video.file_id}')">🎁 Watch Ad to Unlock</button>
+                                <button class="action-btn" onclick="unlockVideo(${video.id})">🎁 Watch Ad to Unlock</button>
                             </div>
                         </div>
                     `;
@@ -146,22 +147,35 @@
             }
         }
 
-        // Monetag Ad Integration (আপনার আসল Zone ID: 3594265)
-        async function unlockVideo(fileId) {
+        // Monetag Ad Integration + Token Generation
+        async function unlockVideo(videoId) {
             if (typeof window.show_3594265 === 'function') {
                 try {
                     const userId = (tg.initDataUnsafe && tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.id : 0;
                     const result = await window.show_3594265({ ymid: userId });
                     
                     if (result && result.reward_event_type === 'valued') {
-                        alert("অ্যাড সফলভাবে দেখা হয়েছে! এখন ভিডিওটি আনলক হবে: " + fileId);
-                        // এখানে পরবর্তী ধাপে ভিডিও আনলক করার লজিক বসবে
+                        // অ্যাড সফল হলে সার্ভারে টোকেন তৈরির রিকোয়েস্ট পাঠানো
+                        const unlockReq = await fetch("https://my-bot-backend.saeidkhan92sk.workers.dev/api/unlock-video", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ userId: userId, videoId: videoId })
+                        });
+                        
+                        const unlockData = await unlockReq.json();
+                        
+                        if (unlockData.success && unlockData.botLink) {
+                            // ইউজারকে স্টোরেজ বটে পাঠানো
+                            window.location.href = unlockData.botLink;
+                        } else {
+                            alert("টোকেন তৈরি করতে সমস্যা হয়েছে।");
+                        }
                     } else {
                         alert("অ্যাড সম্পূর্ণ দেখা হয়নি, দয়া করে আবার চেষ্টা করুন।");
                     }
                 } catch (error) {
-                    console.error("Ad error:", error);
-                    alert("অ্যাড লোড করতে সমস্যা হয়েছে। ইন্টারনেট চেক করুন।");
+                    console.error("Monetag Error:", error);
+                    alert("অ্যাড লোড করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
                 }
             } else {
                 alert("অ্যাড সার্ভিস লোড হচ্ছে, একটু পরে আবার চেষ্টা করুন।");
